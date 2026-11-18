@@ -1,0 +1,60 @@
+Ansible :
+
+1. ping your slave machine
+
+# pign slave_ip_address 
+
+2. Install ansible only on master machine 
+
+# yum install ansible
+
+[root@localhost ansible]# pwd
+/etc/ansible
+
+[root@localhost ansible]# ls
+ansible.cfg  hosts
+
+[root@localhost ansible]# cat ansible.cfg 
+
+[defaults]
+inventory= /etc/ansible/hosts
+host_key_checking= False
+
+[root@localhost ansible]# cat hosts 
+
+[dev]
+machine1 ansible_host=192.168.1.27 ansible_user=root
+---------------------------
+4. go to cd /etc/ssh
+
+# vim sshd_config
+
+40 line - Permitrootlogin yes
+65 line - PasswordAuthentication yes
+
+remove # (REmove comment)
+
+# systemctl restart sshd
+
+NOTE : REPEATE THIS 4TH STEP on EVERY SLAVE MACHINE
+
+
+
+5. CREATE SSH CONNECTION on master
+
+# ssh-keygen
+
+# ssh-copy-id root@slave_ip_address
+
+--------------------
+6. run following command :
+
+# ansible all -m ping
+
+
+
+
+
+
+
+
